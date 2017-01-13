@@ -1,0 +1,42 @@
+<style lang="less">
+    page {
+        background: #ccc;
+    }
+    .container {
+        .title {
+            background: #fff;
+            text-align:center;
+            font-weight:400;
+            padding: 20rpx 0;
+            width: 100%;
+        }
+    }
+</style>
+<template>
+<view class="container">
+    <text class="title">
+        超哥装逼利器
+    </text>
+    <view>
+        <counter></counter>
+    </view>
+    </view>
+</template>
+<script>
+    import wepy from 'wepy';
+    import Counter from '../../components/counter';
+    export default class ChaosIndex extends wepy.page {
+        config = {
+            "navigationBarTitleText": 'counter'
+        };
+        components = {
+            counter:Counter
+        };
+        methods = {
+
+        };
+        events = {
+
+        };
+    }
+</script>

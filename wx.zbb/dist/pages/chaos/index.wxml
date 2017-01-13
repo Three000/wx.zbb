@@ -1,0 +1,15 @@
+
+<view class="container">
+    <text class="title">
+        超哥装逼利器
+    </text>
+    <view>
+        
+    <view class="counter {{$counter$style}}">
+        <button bindtap="$counter$plus" size="mini">  +  </button>
+        <button bindtap="$counter$minus" size="mini">  -  </button>
+        <text class="count"> {{$counter$num}} </text>
+    </view>
+
+    </view>
+    </view>
