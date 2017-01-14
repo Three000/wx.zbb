@@ -1,8 +1,28 @@
 
 <view class="container">
-    <text class="title">
-        超哥装逼利器
-    </text>
+    <view class="header">
+        <view class="left">
+            <view class="year">
+                {{year}}年
+            </view>
+            <view class="month">
+                <text class="num">
+                    01
+                </text>月
+                <view class="triggleBottm"/>
+            </view>
+        </view>
+        <view class="right">
+            <view class="box">
+                <view class="title">
+                    总账单
+                </view>
+                <text class="money">
+                    47.00
+                </text>
+            </view>
+        </view>
+    </view>
     <view>
         
     <view class="counter {{$counter$style}}">
@@ -22,7 +42,7 @@
         </view>
         <button bindtap="showPicker">显示隐藏showPicker</button>
     </view>
-    <view xmlns:wx="" wx:if="{{showPicker}}" hidden="">
+    <view xmlns:wx="" wx:if="{{showPicker}}">
     
 <view hidden="{{}}">
   <view>{{$picker$year}}年{{$picker$month}}月{{$picker$day}}日</view>

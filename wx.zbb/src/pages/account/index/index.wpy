@@ -1,22 +1,50 @@
 <style lang="less">
     page {
-        background: #ccc;
+        background: #f3f6fa;
     }
     .container {
-        .title {
+        .header {
+            height: 80rpx;
             background: #fff;
-            text-align:center;
-            font-weight:400;
-            padding: 20rpx 0;
-            width: 100%;
+            color: #888;
+            display: flex;
+            .left {
+                width: 80rpx;
+            }
+            .right {
+                -webkit-flex: 1;
+                display:-webkit-box;
+                -webkit-box-pack: center;
+                -webkit-box-align: center;
+            }
         }
     }
 </style>
 <template>
 <view class="container">
-    <text class="title">
-        超哥装逼利器
-    </text>
+    <view class="header">
+        <view class="left">
+            <view class="year">
+                {{year}}年
+            </view>
+            <view class="month">
+                <text class="num">
+                    01
+                </text>月
+                <view class="triggleBottm"></view>
+            </view>
+        </view>
+        <view class="right">
+            <view class="box">
+                <view class="title">
+                    总账单
+                </view>
+                <text class="money">
+                    47.00
+                </text>
+            </view>
+        </view>
+    </view>
     <view>
         <counter></counter>
     </view>
@@ -30,17 +58,17 @@
         </view>
         <button bindtap="showPicker">显示隐藏showPicker</button>
     </view>
-    <view wx:if="{{showPicker}}" hidden="">
+    <view wx:if="{{showPicker}}">
     <picker></picker>
     </view>
 </template>
 <script>
     import wepy from 'wepy';
-    import Counter from '../../components/counter';
-    import Picker from '../../components/picker';
-    export default class ChaosIndex extends wepy.page {
+    import Counter from '../../../components/counter';
+    import Picker from '../../../components/picker';
+    export default class account extends wepy.page {
         config = {
-            "navigationBarTitleText": 'counter'
+            "navigationBarTitleText": '记账'
         };
         data = {
             showPicker: false,

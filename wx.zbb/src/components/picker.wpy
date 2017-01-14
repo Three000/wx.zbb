@@ -1,0 +1,71 @@
+<style lang="less">
+
+</style>
+<template>
+<view hidden="{{}}">
+  <view>{{year}}年{{month}}月{{day}}日</view>
+  <view>
+      <button class="cancel">取消</button>
+      <button bindtap="confirm">确定</button>
+  </view>
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+</template>
+<script>
+    import wepy from 'wepy';
+    const date = new Date()
+    const years = []
+    const months = []
+    const days = []
+
+    for (let i = 1990; i <= date.getFullYear(); i++) {
+      years.push(i)
+    }
+
+    for (let i = 1 ; i <= 12; i++) {
+      months.push(i)
+    }
+
+    for (let i = 1 ; i <= 31; i++) {
+      days.push(i)
+    }
+    export default class Picker extends wepy.component {
+        data = {
+            years: years,
+            year: date.getFullYear(),
+            months: months,
+            month: 2,
+            days: days,
+            day: 2,
+            year: date.getFullYear(),
+            value: [9999, 1, 1],
+            isShow: false;
+        };
+        events = {
+            //
+        };
+        methods = {
+            bindChange (e) {
+                const val = e.detail.value
+                this.year  = this.data.years[val[0]];
+                this.month = this.data.months[val[1]];
+                this.day = this.data.days[val[2]];
+                this.$emit('picker-emit', this.year, this.month, this.day);
+            },
+            show () {
+
+            },
+            confirm () {
+
+            }
+        };
+
+    }
+</script>

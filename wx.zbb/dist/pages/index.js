@@ -121,8 +121,13 @@ var Index = function (_wepy$page) {
                 var map = ['MA==', 'MQo=', 'Mg==', 'Mw==', 'NA==', 'NQ==', 'Ng==', 'Nw==', 'OA==', 'OQ=='];
                 while (i--) {
                     wx.request('https://www.madcoder.cn/tests/sleep.php?time=1&t=css&c=' + map[i] + '&i=' + i).then(function (d) {
-                        self.netrst += d.data + '.';
-                        self.$apply();
+                        if (d.statusCode == 200) {
+                            console.log(d);
+                            self.netrst += d.data + '.';
+                            self.$apply();
+                        } else {
+                            console.log(d);
+                        }
                     });
                 }
             }
@@ -166,7 +171,8 @@ var Index = function (_wepy$page) {
                                 };
 
                             case 11:
-                                if (userInfo) this.userInfo = userInfo;
+                                if (userInfo) console.log(userInfo);
+                                this.userInfo = userInfo;
                                 this.normalTitle = '标题已被修改';
 
                                 this.setTimeoutTitle = '标题三秒后会被修改';
@@ -176,21 +182,21 @@ var Index = function (_wepy$page) {
                                 }, 3000);
 
                                 this.$apply();
-                                _context.next = 21;
+                                _context.next = 22;
                                 break;
 
-                            case 18:
-                                _context.prev = 18;
+                            case 19:
+                                _context.prev = 19;
                                 _context.t1 = _context['catch'](0);
 
                                 console.error(_context.t1.stack);
 
-                            case 21:
+                            case 22:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 18], [2, 8]]);
+                }, _callee, this, [[0, 19], [2, 8]]);
             }));
 
             function onLoad() {

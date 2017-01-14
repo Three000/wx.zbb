@@ -4,52 +4,52 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = require('./../../npm/babel-runtime/core-js/object/get-prototype-of.js');
+var _getPrototypeOf = require('./../../../npm/babel-runtime/core-js/object/get-prototype-of.js');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require('./../../npm/babel-runtime/helpers/classCallCheck.js');
+var _classCallCheck2 = require('./../../../npm/babel-runtime/helpers/classCallCheck.js');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _possibleConstructorReturn2 = require('./../../npm/babel-runtime/helpers/possibleConstructorReturn.js');
+var _possibleConstructorReturn2 = require('./../../../npm/babel-runtime/helpers/possibleConstructorReturn.js');
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require('./../../npm/babel-runtime/helpers/inherits.js');
+var _inherits2 = require('./../../../npm/babel-runtime/helpers/inherits.js');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _wepy = require('./../../npm/wepy/lib/wepy.js');
+var _wepy = require('./../../../npm/wepy/lib/wepy.js');
 
 var _wepy2 = _interopRequireDefault(_wepy);
 
-var _counter = require('./../../components/counter.js');
+var _counter = require('./../../../components/counter.js');
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _picker = require('./../../components/picker.js');
+var _picker = require('./../../../components/picker.js');
 
 var _picker2 = _interopRequireDefault(_picker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ChaosIndex = function (_wepy$page) {
-    (0, _inherits3.default)(ChaosIndex, _wepy$page);
+var account = function (_wepy$page) {
+    (0, _inherits3.default)(account, _wepy$page);
 
-    function ChaosIndex() {
+    function account() {
         var _ref;
 
         var _temp, _this, _ret;
 
-        (0, _classCallCheck3.default)(this, ChaosIndex);
+        (0, _classCallCheck3.default)(this, account);
 
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = ChaosIndex.__proto__ || (0, _getPrototypeOf2.default)(ChaosIndex)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
-            "navigationBarTitleText": 'counter'
+        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = account.__proto__ || (0, _getPrototypeOf2.default)(account)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
+            "navigationBarTitleText": '记账'
         }, _this.data = {
             showPicker: false,
             year: null,
@@ -78,8 +78,8 @@ var ChaosIndex = function (_wepy$page) {
         }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
     }
 
-    return ChaosIndex;
+    return account;
 }(_wepy2.default.page);
 
 
-Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(ChaosIndex));
+Page(require('./../../../npm/wepy/lib/wepy.js').default.$createPage(account));

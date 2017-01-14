@@ -16,9 +16,9 @@ import wepy from 'wepy';
 import "babel-polyfill";
 
 export default class extends wepy.app {
-
     config = {
             "pages":[
+            "pages/account/index/index",
             "pages/chaos/index",
             "pages/index"
         ],
