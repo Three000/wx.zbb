@@ -2,12 +2,8 @@
 
 </style>
 <template>
-<view hidden="{{}}">
+<view hidden="{{isShow}}">
   <view>{{year}}年{{month}}月{{day}}日</view>
-  <view>
-      <button class="cancel">取消</button>
-      <button bindtap="confirm">确定</button>
-  </view>
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
     <picker-view-column>
       <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
@@ -46,7 +42,7 @@
             day: 2,
             year: date.getFullYear(),
             value: [9999, 1, 1],
-            isShow: false;
+            isShow: true
         };
         events = {
             //
@@ -60,10 +56,14 @@
                 this.$emit('picker-emit', this.year, this.month, this.day);
             },
             show () {
-
+                this.isShow = !this.isShow;
             },
             confirm () {
-
+                const val = e.detail.value
+                this.year  = this.data.years[val[0]];
+                this.month = this.data.months[val[1]];
+                this.day = this.data.days[val[2]];
+                this.$emit('picker-emit', this.year, this.month, this.day);
             }
         };
 

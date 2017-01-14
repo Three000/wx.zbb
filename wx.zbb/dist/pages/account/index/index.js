@@ -34,6 +34,8 @@ var _picker2 = _interopRequireDefault(_picker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var currentDate = new Date();
+
 var account = function (_wepy$page) {
     (0, _inherits3.default)(account, _wepy$page);
 
@@ -51,9 +53,9 @@ var account = function (_wepy$page) {
         return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = account.__proto__ || (0, _getPrototypeOf2.default)(account)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
             "navigationBarTitleText": '记账'
         }, _this.data = {
-            showPicker: false,
-            year: null,
-            month: null,
+            showPicker: true, //日期xu
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1 < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
             day: null
         }, _this.components = {
             counter: _counter2.default,
@@ -61,8 +63,7 @@ var account = function (_wepy$page) {
         }, _this.methods = {
             showPicker: function showPicker() {
                 _this.showPicker = !_this.showPicker;
-            },
-            pickerCommunicate: function pickerCommunicate() {}
+            }
         }, _this.events = {
             'picker-emit': function pickerEmit($events) {
                 for (var _len2 = arguments.length, items = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {

@@ -4,18 +4,60 @@
     }
     .container {
         .header {
-            height: 80rpx;
             background: #fff;
             color: #888;
             display: flex;
+            width:100%;
+            font-size: 11pt;
+            padding: 10rpx 0;
             .left {
-                width: 80rpx;
+                width: 200rpx;
+                display: -webkit-box;
+                -webkit-box-pack:center;
+                -webkit-box-align:center;
+                .monthBox {
+                    width: 100%;
+                    text-align:center;
+                }
+                .month {
+                    border-right: 1rpx solid #888;
+                    padding: 10rpx 0;
+                    .num {
+                        font-size: 15pt;
+                        color: #353535;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    .text {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    .monthText {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    .triggleBottm {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 0;
+                        height: 0;
+                        border-top: 10rpx solid #353535;
+                        border-right: 10rpx solid transparent;
+                        border-left: 10rpx solid transparent;
+                        margin-left: 10rpx;
+                    }
+                }
             }
             .right {
                 -webkit-flex: 1;
                 display:-webkit-box;
                 -webkit-box-pack: center;
                 -webkit-box-align: center;
+                .money {
+                    padding: 10rpx 0;
+                    font-size: 15pt;
+                    color: #353535;
+                }
             }
         }
     }
@@ -24,24 +66,20 @@
 <view class="container">
     <view class="header">
         <view class="left">
-            <view class="year">
-                {{year}}年
-            </view>
-            <view class="month">
-                <text class="num">
-                    01
-                </text>月
-                <view class="triggleBottm"></view>
+            <view class="monthBox">
+                <text class="year">{{year}}年</text>
+                <view class="month">
+                    <view class="monthText" bindtap="showPicker"><text class="num">{{month}}</text><text class="text">月</text></view>
+                    <view class="triggleBottm"></view>
+                </view>
             </view>
         </view>
         <view class="right">
             <view class="box">
-                <view class="title">
-                    总账单
+                <view class="title">总账单</view>
+                <view>
+                <text class="money">47.00</text>
                 </view>
-                <text class="money">
-                    47.00
-                </text>
             </view>
         </view>
     </view>
@@ -49,31 +87,25 @@
         <counter></counter>
     </view>
     </view>
-    <view>
-        <text>
-            日期空间
-        </text>
-        <view>
-            {{year}}-{{month}}-{{day}}
-        </view>
-        <button bindtap="showPicker">显示隐藏showPicker</button>
-    </view>
-    <view wx:if="{{showPicker}}">
-    <picker></picker>
+    <view hidden="{{showPicker}}">
+        <picker></picker>
     </view>
 </template>
 <script>
     import wepy from 'wepy';
     import Counter from '../../../components/counter';
     import Picker from '../../../components/picker';
+
+    const currentDate = new Date();
+
     export default class account extends wepy.page {
         config = {
             "navigationBarTitleText": '记账'
         };
         data = {
-            showPicker: false,
-            year: null,
-            month: null,
+            showPicker: true,//日期xu
+            year: currentDate.getFullYear(),
+            month: (currentDate.getMonth() + 1) < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
             day: null
         };
         components = {
@@ -83,9 +115,6 @@
         methods = {
             showPicker: () => {
                 this.showPicker = !this.showPicker;
-            },
-            pickerCommunicate: () => {
-
             }
         };
         events = {
