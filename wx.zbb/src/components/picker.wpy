@@ -1,8 +1,13 @@
 <style lang="less">
-
+  .component-picker {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 999;
+  }
 </style>
 <template>
-<view hidden="{{isShow}}">
+<view class="component-picker" style="width:100%" hidden="{{isShow}}">
   <view>{{year}}年{{month}}月{{day}}日</view>
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
     <picker-view-column>
@@ -10,6 +15,9 @@
     </picker-view-column>
     <picker-view-column>
       <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
     </picker-view-column>
   </picker-view>
 </view>

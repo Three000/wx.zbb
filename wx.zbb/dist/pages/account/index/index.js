@@ -36,24 +36,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var currentDate = new Date();
 
-var account = function (_wepy$page) {
-    (0, _inherits3.default)(account, _wepy$page);
+var Account = function (_wepy$page) {
+    (0, _inherits3.default)(Account, _wepy$page);
 
-    function account() {
+    function Account() {
         var _ref;
 
         var _temp, _this, _ret;
 
-        (0, _classCallCheck3.default)(this, account);
+        (0, _classCallCheck3.default)(this, Account);
 
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = account.__proto__ || (0, _getPrototypeOf2.default)(account)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
+        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Account.__proto__ || (0, _getPrototypeOf2.default)(Account)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
             "navigationBarTitleText": '记账'
         }, _this.data = {
-            showPicker: true, //日期xu
             year: currentDate.getFullYear(),
             month: currentDate.getMonth() + 1 < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
             day: null
@@ -62,7 +61,7 @@ var account = function (_wepy$page) {
             picker: _picker2.default
         }, _this.methods = {
             showPicker: function showPicker() {
-                _this.showPicker = !_this.showPicker;
+                _this.$invoke('picker', 'show');
             }
         }, _this.events = {
             'picker-emit': function pickerEmit($events) {
@@ -79,8 +78,8 @@ var account = function (_wepy$page) {
         }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
     }
 
-    return account;
+    return Account;
 }(_wepy2.default.page);
 
 
-Page(require('./../../../npm/wepy/lib/wepy.js').default.$createPage(account));
+Page(require('./../../../npm/wepy/lib/wepy.js').default.$createPage(Account));
