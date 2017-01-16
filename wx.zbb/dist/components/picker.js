@@ -68,7 +68,7 @@ var Picker = function (_wepy$component) {
             month: 2,
             days: days,
             day: 2
-        }, (0, _defineProperty3.default)(_this$data, 'year', date.getFullYear()), (0, _defineProperty3.default)(_this$data, 'value', [9999, 1, 1]), (0, _defineProperty3.default)(_this$data, 'isShow', true), _this$data), _this.events = {
+        }, (0, _defineProperty3.default)(_this$data, 'year', date.getFullYear()), (0, _defineProperty3.default)(_this$data, 'value', [9999, 1, 1]), (0, _defineProperty3.default)(_this$data, 'isShow', false), _this$data), _this.events = {
             //
         }, _this.methods = {
             bindChange: function bindChange(e) {
@@ -80,6 +80,8 @@ var Picker = function (_wepy$component) {
             },
             show: function show() {
                 this.isShow = !this.isShow;
+                console.log(this.isShow);
+                this.$apply();
             },
             confirm: function confirm() {
                 var val = e.detail.value;

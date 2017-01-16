@@ -61,7 +61,7 @@ var Account = function (_wepy$page) {
             picker: _picker2.default
         }, _this.methods = {
             showPicker: function showPicker() {
-                _this.$invoke('picker', 'show');
+                _this.$invoke('picker', 'show', 1, 2);
             }
         }, _this.events = {
             'picker-emit': function pickerEmit($events) {

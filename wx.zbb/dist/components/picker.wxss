@@ -1,1 +1,1 @@
-.component-picker{position:fixed;bottom:0;width:100%;z-index:999}
+.component-picker{position:fixed;bottom:0;left:0;right:0;width:100%}.component-picker.account-show{display:block}picker-view-column view{text-align:center}

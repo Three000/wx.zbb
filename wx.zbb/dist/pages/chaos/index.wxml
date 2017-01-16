@@ -24,19 +24,15 @@
     </view>
     <view xmlns:wx="" wx:if="{{showPicker}}" hidden="">
     
-<view class="component-picker" style="width:100%" hidden="{{$picker$isShow}}">
-  <view>{{$picker$year}}年{{$picker$month}}月{{$picker$day}}日</view>
-  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{$picker$value}}" bindchange="$picker$bindChange">
-    <picker-view-column>
-      <view xmlns:wx="" wx:for="{{$picker$years}}" style="line-height: 50px">{{item}}年</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{$picker$months}}" style="line-height: 50px">{{item}}月</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{$picker$days}}" style="line-height: 50px">{{item}}日</view>
-    </picker-view-column>
-  </picker-view>
+<view class="component-picker" xmlns:wx="" wx:if="{{$picker$isShow}}" style="width:100%">
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{$picker$value}}" bindchange="$picker$bindChange">
+        <picker-view-column>
+            <view wx:for="{{$picker$years}}" style="line-height: 50px">{{item}}年</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view wx:for="{{$picker$months}}" style="line-height: 50px">{{item}}月</view>
+        </picker-view-column>
+    </picker-view>
 </view>
 
     </view>

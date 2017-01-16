@@ -78,7 +78,7 @@ page {
             <view class="box">
                 <view class="title">总账单</view>
                 <view>
-                    <text class="money">47.00</text> 
+                    <text class="money">47.00</text>
                 </view>
             </view>
         </view>
@@ -111,7 +111,7 @@ export default class Account extends wepy.page {
     };
     methods = {
         showPicker: () => {
-            this.$invoke('picker', 'show');
+            this.$invoke('picker', 'show', 1, 2);
         }
     };
     events = {
