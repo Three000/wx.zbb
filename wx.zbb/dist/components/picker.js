@@ -16,6 +16,10 @@ var _classCallCheck2 = require('./../npm/babel-runtime/helpers/classCallCheck.js
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
+var _createClass2 = require('./../npm/babel-runtime/helpers/createClass.js');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
 var _possibleConstructorReturn2 = require('./../npm/babel-runtime/helpers/possibleConstructorReturn.js');
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
@@ -61,14 +65,16 @@ var Picker = function (_wepy$component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Picker.__proto__ || (0, _getPrototypeOf2.default)(Picker)).call.apply(_ref, [this].concat(args))), _this), _this.data = (_this$data = {
+        return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Picker.__proto__ || (0, _getPrototypeOf2.default)(Picker)).call.apply(_ref, [this].concat(args))), _this), _this.props = {
+            status: String
+        }, _this.data = (_this$data = {
             years: years,
             year: date.getFullYear(),
             months: months,
             month: 2,
             days: days,
             day: 2
-        }, (0, _defineProperty3.default)(_this$data, 'year', date.getFullYear()), (0, _defineProperty3.default)(_this$data, 'value', [9999, 1, 1]), (0, _defineProperty3.default)(_this$data, 'isShow', false), _this$data), _this.events = {
+        }, (0, _defineProperty3.default)(_this$data, 'year', date.getFullYear()), (0, _defineProperty3.default)(_this$data, 'value', [date.getFullYear, date.getMonth + 1, date.getDays]), (0, _defineProperty3.default)(_this$data, 'isShow', false), (0, _defineProperty3.default)(_this$data, 'animationData', ''), _this$data), _this.events = {
             //
         }, _this.methods = {
             bindChange: function bindChange(e) {
@@ -79,10 +85,26 @@ var Picker = function (_wepy$component) {
                 this.$emit('picker-emit', this.year, this.month, this.day);
             },
             show: function show() {
-                this.isShow = !this.isShow;
-                console.log(this.isShow);
+                var animation = wx.createAnimation({
+                    duration: 300,
+                    timingFunction: 'ease-out'
+                });
+                animation.translateY(0).step();
+                this.animationData = animation;
+                this.isShow = true;
                 this.$apply();
             },
+            hide: function hide() {
+                var animation = wx.createAnimation({
+                    duration: 100,
+                    timingFunction: 'ease-in'
+                });
+                animation.translateY('100%').step();
+                this.animationData = animation;
+                this.isShow = false;
+                this.$apply();
+            },
+            showModal: function showModal() {},
             confirm: function confirm() {
                 var val = e.detail.value;
                 this.year = this.data.years[val[0]];
@@ -93,6 +115,13 @@ var Picker = function (_wepy$component) {
         }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
     }
 
+    (0, _createClass3.default)(Picker, [{
+        key: 'onLoad',
+        value: function onLoad() {
+            console.log(1);
+            console.log(this.status);
+        }
+    }]);
     return Picker;
 }(_wepy2.default.component);
 

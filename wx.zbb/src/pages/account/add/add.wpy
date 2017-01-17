@@ -2,65 +2,6 @@
 page {
     background: #f3f6fa;
 }
-.container {
-    .header {
-        background: #fff;
-        color: #888;
-        display: flex;
-        width: 100%;
-        font-size: 11pt;
-        padding: 10rpx 0;
-        .left {
-            width: 200rpx;
-            display: -webkit-box;
-            -webkit-box-pack: center;
-            -webkit-box-align: center;
-            .monthBox {
-                width: 100%;
-                text-align: center;
-            }
-            .month {
-                border-right: 1rpx solid #ccc;
-                padding: 10rpx 0;
-                .num {
-                    font-size: 15pt;
-                    color: #353535;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                .text {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                .monthText {
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-                .triggleBottm {
-                    display: inline-block;
-                    vertical-align: middle;
-                    width: 0;
-                    height: 0;
-                    border-top: 10rpx solid #353535;
-                    border-right: 10rpx solid transparent;
-                    border-left: 10rpx solid transparent;
-                    margin-left: 10rpx;
-                }
-            }
-        }
-        .right {
-            -webkit-flex: 1;
-            display: -webkit-box;
-            -webkit-box-pack: center;
-            -webkit-box-align: center;
-            .money {
-                padding: 10rpx 0;
-                font-size: 15pt;
-                color: #353535;
-            }
-        }
-    }
-}
 </style>
 <template>
 <view class="container">
@@ -86,7 +27,7 @@ page {
     <view>
         <counter></counter>
     </view>
-    <picker :status="statusProps"></picker>
+    <picker></picker>
 </view>
 </template>
 <script>
@@ -104,8 +45,7 @@ export default class Account extends wepy.page {
         year: currentDate.getFullYear(),
         month: (currentDate.getMonth() + 1) < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
         day: null,
-        money: 50,
-        statusProps: '2'
+        money: 50
     };
     components = {
         counter: Counter,

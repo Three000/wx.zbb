@@ -5,24 +5,45 @@
     left: 0;
     right: 0;
     width: 100%;
+    transform: translateY(100%);
+    z-index: 100;
+    background: #fff;
 }
 .component-picker.account-show {
     display: block;
 }
 picker-view-column view {
-  text-align: center;
+    text-align: center;
+}
+.bgModel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.6);
+    height: 100%;
+    width: 100%;
+    display: none;
+    z-index: 90;
+}
+.daySeletor {
+    display: none;
 }
 </style>
 <template>
-<view class="component-picker" wx:if="{{isShow}}" style="width:100%">
-    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+<view class="component-picker" animation="{{animationData}}" style="width:100%">
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 250px;" value="{{value}}" bindchange="bindChange">
         <picker-view-column>
             <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
         </picker-view-column>
         <picker-view-column>
             <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
         </picker-view-column>
+        <picker-view-column>
+            <view wx:for="{{days}}" style="line-height: 50px">{{item}}日</view>
+        </picker-view-column>
     </picker-view>
+</view>
+<view class="bgModel {{isShow ? 'account-show' : ''}}" bindtap="hide">
 </view>
 </template>
 <script>
@@ -44,6 +65,10 @@ for (let i = 1; i <= 31; i++) {
     days.push(i)
 }
 export default class Picker extends wepy.component {
+
+    props = {
+        status: String
+    }
     data = {
         years: years,
         year: date.getFullYear(),
@@ -52,33 +77,58 @@ export default class Picker extends wepy.component {
         days: days,
         day: 2,
         year: date.getFullYear(),
-        value: [9999, 1, 1],
-        isShow: false
-    };
+        value: [date.getFullYear, date.getMonth + 1, date.getDays],
+        isShow: false,
+        animationData: ''
+    }
+
     events = {
         //
-    };
+    }
+
     methods = {
         bindChange(e) {
-            const val = e.detail.value
+            const val = e.detail.value;
             this.year = this.data.years[val[0]];
             this.month = this.data.months[val[1]];
             this.day = this.data.days[val[2]];
             this.$emit('picker-emit', this.year, this.month, this.day);
         },
         show() {
-            this.isShow = !this.isShow;
-            console.log(this.isShow);
+            let animation = wx.createAnimation({
+                duration: 300,
+                timingFunction: 'ease-out'
+            });
+            animation.translateY(0).step();
+            this.animationData = animation;
+            this.isShow = true;
             this.$apply();
         },
+        hide() {
+            let animation = wx.createAnimation({
+                duration: 100,
+                timingFunction: 'ease-in'
+            });
+            animation.translateY('100%').step();
+            this.animationData = animation;
+            this.isShow = false;
+            this.$apply();
+        },
+        showModal() {
+
+        },
         confirm() {
-            const val = e.detail.value
+            const val = e.detail.value;
             this.year = this.data.years[val[0]];
             this.month = this.data.months[val[1]];
             this.day = this.data.days[val[2]];
             this.$emit('picker-emit', this.year, this.month, this.day);
-        }
-    };
+        },
 
+    }
+    onLoad() {
+        console.log(1);
+        console.log(this.status);
+    }
 }
 </script>

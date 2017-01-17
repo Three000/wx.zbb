@@ -9,10 +9,10 @@
     box-sizing: border-box;
 }
 .account-show {
-  display: block;
+    display: block !important;
 }
 .account-hide {
-  display: none;
+    display: none !important;
 }
 </style>
 
@@ -32,7 +32,16 @@ export default class extends wepy.app {
             "navigationBarBackgroundColor": "#fff",
             "navigationBarTitleText": "WeChat",
             "navigationBarTextStyle": "black"
-        }
+        },
+        "tabBar": {
+            "list": [{
+                "pagePath": "pages/account/index/index",
+                "text": "首页"
+            }, {
+                "pagePath": "pages/index",
+                "text": "记记"
+            }]
+        },
     };
 
     globalData = {

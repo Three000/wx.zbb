@@ -61,6 +61,15 @@ var _class = function (_wepy$app) {
                 "navigationBarBackgroundColor": "#fff",
                 "navigationBarTitleText": "WeChat",
                 "navigationBarTextStyle": "black"
+            },
+            "tabBar": {
+                "list": [{
+                    "pagePath": "pages/account/index/index",
+                    "text": "首页"
+                }, {
+                    "pagePath": "pages/index",
+                    "text": "记记"
+                }]
             }
         }, _this.globalData = {
             userInfo: null

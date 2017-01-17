@@ -1,1 +1,1 @@
-.component-picker{position:fixed;bottom:0;left:0;right:0;width:100%}.component-picker.account-show{display:block}picker-view-column view{text-align:center}
+.component-picker{position:fixed;bottom:0;left:0;right:0;width:100%;transform:translateY(100%);z-index:100;background:#fff}.component-picker.account-show{display:block}picker-view-column view{text-align:center}.bgModel{position:fixed;top:0;left:0;background:rgba(0,0,0,0.6);height:100%;width:100%;display:none;z-index:90}.daySeletor{display:none}

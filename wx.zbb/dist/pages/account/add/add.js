@@ -56,9 +56,8 @@ var Account = function (_wepy$page) {
             year: currentDate.getFullYear(),
             month: currentDate.getMonth() + 1 < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
             day: null,
-            money: 50,
-            statusProps: '2'
-        }, _this.$props = { "picker": { "v-bind:status.once": "statusProps" } }, _this.components = {
+            money: 50
+        }, _this.components = {
             counter: _counter2.default,
             picker: _picker2.default
         }, _this.methods = {
@@ -84,5 +83,4 @@ var Account = function (_wepy$page) {
     return Account;
 }(_wepy2.default.page);
 
-
-Page(require('./../../../npm/wepy/lib/wepy.js').default.$createPage(Account));
+exports.default = Account;
