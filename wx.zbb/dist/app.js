@@ -55,7 +55,7 @@ var _class = function (_wepy$app) {
         }
 
         return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = _class.__proto__ || (0, _getPrototypeOf2.default)(_class)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
-            "pages": ["pages/account/index/index", "pages/chaos/index", "pages/index"],
+            "pages": ["pages/account/index/index", "pages/account/add/add", "pages/chaos/index", "pages/index"],
             "window": {
                 "backgroundTextStyle": "light",
                 "navigationBarBackgroundColor": "#fff",
@@ -126,6 +126,27 @@ var _class = function (_wepy$app) {
 
             return getUserInfo;
         }()
+    }, {
+        key: "getLocalData",
+        value: function getLocalData() {
+            try {
+                var value = wx.getStorageSync('travelLocal');
+                if (value) {
+                    return value;
+                } else {
+                    return false;
+                }
+            } catch (e) {
+                // Do something when catch error
+            }
+        }
+    }, {
+        key: "setLocalData",
+        value: function setLocalData(data) {
+            try {
+                wx.setStorageSync('travelLocal', data);
+            } catch (e) {}
+        }
     }]);
     return _class;
 }(_wepy2.default.app);

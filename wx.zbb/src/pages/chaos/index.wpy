@@ -1,16 +1,16 @@
 <style lang="less">
-    page {
-        background: #ccc;
+page {
+    background: #ccc;
+}
+.container {
+    .title {
+        background: #fff;
+        text-align: center;
+        font-weight: 400;
+        padding: 20rpx 0;
+        width: 100%;
     }
-    .container {
-        .title {
-            background: #fff;
-            text-align:center;
-            font-weight:400;
-            padding: 20rpx 0;
-            width: 100%;
-        }
-    }
+}
 </style>
 <template>
 <view class="container">
@@ -20,54 +20,57 @@
     <view>
         <counter></counter>
     </view>
-    </view>
-    <view>
-        <text>
+
+
+</view>
+<view>
+    <text>
             日期空间
         </text>
-        <view>
-            {{year}}-{{month}}-{{day}}
-        </view>
-        <button bindtap="showPicker">显示隐藏showPicker</button>
+    <view>
+        {{year}}-{{month}}-{{day}}
     </view>
-    <view wx:if="{{showPicker}}" hidden="">
+    <button bindtap="showPicker">显示隐藏showPicker</button>
+</view>
+<view wx:if="{{showPicker}}" hidden="">
     <picker></picker>
-    </view>
+</view>
 </template>
 <script>
-    import wepy from 'wepy';
-    import Counter from '../../components/counter';
-    import Picker from '../../components/picker';
-    export default class ChaosIndex extends wepy.page {
-        config = {
-            "navigationBarTitleText": 'counter'
-        };
-        data = {
-            showPicker: false,
-            year: null,
-            month: null,
-            day: null
-        };
-        components = {
-            counter: Counter,
-            picker: Picker
-        };
-        methods = {
-            showPicker: () => {
-                this.showPicker = !this.showPicker;
-            },
-            pickerCommunicate: () => {
+import wepy from 'wepy';
+import Counter from '../../components/counter';
+import Picker from '../../components/picker';
+export default class ChaosIndex extends wepy.page {
+    config = {
+        "navigationBarTitleText": 'counter'
+    };
+    data = {
+        showPicker: false,
+        year: null,
+        month: null,
+        day: null
+    };
+    components = {
+        counter: Counter,
+        picker: Picker
+    };
+    methods = {
+        showPicker: () => {
+            this.showPicker = !this.showPicker;
+        },
+        pickerCommunicate: () => {
 
-            }
-        };
-        events = {
-            'picker-emit': ($events, ...items) => {
-                console.log($events+'-'+ $events.source.year + '-' + $events.source.month + '-' + $events.source.day+'====='+items);
-                this.year = items[0];
-                this.month = items[1];
-                this.day = items[2];
-                this.$apply();
-            }
-        };
-    }
+        }
+    };
+    events = {
+        'picker-emit': ($events, ...items) => {
+            console.log($events + '-' + $events.source.year + '-' + $events.source.month + '-' + $events.source.day + '=====' + items);
+            this.year = items[0];
+            this.month = items[1];
+            this.day = items[2];
+            this.$apply();
+        }
+    };
+
+}
 </script>

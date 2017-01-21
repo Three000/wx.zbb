@@ -24,13 +24,9 @@ var _wepy = require('./../../../npm/wepy/lib/wepy.js');
 
 var _wepy2 = _interopRequireDefault(_wepy);
 
-var _counter = require('./../../../components/counter.js');
+var _wepyComToast = require('./../../../npm/wepy-com-toast/toast.js');
 
-var _counter2 = _interopRequireDefault(_counter);
-
-var _picker = require('./../../../components/picker.js');
-
-var _picker2 = _interopRequireDefault(_picker);
+var _wepyComToast2 = _interopRequireDefault(_wepyComToast);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,30 +48,48 @@ var Account = function (_wepy$page) {
 
         return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Account.__proto__ || (0, _getPrototypeOf2.default)(Account)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
             "navigationBarTitleText": '记记'
-        }, _this.data = {
-            year: currentDate.getFullYear(),
-            month: currentDate.getMonth() + 1 < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
-            day: null,
-            money: 50
         }, _this.components = {
-            counter: _counter2.default,
-            picker: _picker2.default
+            toast: _wepyComToast2.default
+        }, _this.data = {
+            travelName: '',
+            joins: '',
+            mark: '',
+            primarySize: 'default',
+            loading: false,
+            plain: false,
+            disabled: false
         }, _this.methods = {
-            showPicker: function showPicker() {
-                _this.$invoke('picker', 'show', 1, 2);
-            }
-        }, _this.events = {
-            'picker-emit': function pickerEmit($events) {
-                for (var _len2 = arguments.length, items = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-                    items[_key2 - 1] = arguments[_key2];
-                }
-
-                console.log($events + '-' + $events.source.year + '-' + $events.source.month + '-' + $events.source.day + '=====' + items);
-                _this.year = items[0];
-                _this.month = items[1];
-                _this.day = items[2];
-                _this.money = --_this.money;
+            travelNameInput: function travelNameInput(e) {
+                _this.travelName = e.detail.value;
                 _this.$apply();
+            },
+            joinsInput: function joinsInput(e) {
+                this.joins = e.detail.value;
+                this.$apply();
+            },
+            createLocal: function createLocal() {
+                var localData = this.$parent.getLocalData() || [];
+                console.log(localData);
+                if (!this.travelName) {
+                    console.log(1);
+                    this.$invoke('toast', 'show', {
+                        title: '账单名称必填'
+                    });
+                } else if (!this.joins) {
+                    this.$invoke('toast', 'show', {
+                        title: '参与人必填'
+                    });
+                } else {
+                    var addData = {
+                        id: localData.length + 1,
+                        travelName: this.travelName,
+                        users: this.joins.split(','),
+                        mark: this.mark,
+                        content: {}
+                    };
+                    localData.push(addData);
+                    this.$parent.setLocalData(localData);
+                }
             }
         }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
     }
@@ -83,4 +97,5 @@ var Account = function (_wepy$page) {
     return Account;
 }(_wepy2.default.page);
 
-exports.default = Account;
+
+Page(require('./../../../npm/wepy/lib/wepy.js').default.$createPage(Account));

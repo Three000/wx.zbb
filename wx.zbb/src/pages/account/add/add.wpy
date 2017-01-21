@@ -2,38 +2,46 @@
 page {
     background: #f3f6fa;
 }
+.container {
+    padding: 10rpx 40rpx;
+    .title {
+        font-size: 10pt;
+        margin: 20rpx 0 20rpx 1px;
+    }
+    input {
+        border: 1px solid #dbdbdb;
+        font-size: 9pt;
+        background: #fff;
+        padding: 5rpx 20rpx;
+    }
+    textarea {
+        border: 1px solid #dbdbdb;
+        font-size: 9pt;
+        background: #fff;
+        padding: 15rpx 20rpx;
+    }
+    button {
+        width: 100%;
+        font-size: 11pt;
+        margin-top: 40rpx;
+    }
+}
 </style>
 <template>
 <view class="container">
-    <view class="header">
-        <view class="left">
-            <view class="monthBox">
-                <text class="year">{{year}}年</text>
-                <view class="month" bindtap="showPicker">
-                    <view class="monthText"><text class="num">{{month}}</text><text class="text">月</text></view>
-                    <view class="triggleBottm"></view>
-                </view>
-            </view>
-        </view>
-        <view class="right">
-            <view class="box">
-                <view class="title">总账单</view>
-                <view>
-                    <text class="money">{{money}}</text>
-                </view>
-            </view>
-        </view>
-    </view>
-    <view>
-        <counter></counter>
-    </view>
-    <picker></picker>
+    <text class="title">账单名称</text>
+    <input placeholder="请填写账单名称" value="{{travelName}}" bindinput="travelNameInput">
+    <text class="title">参与人（用括号或换行分隔）</text>
+    <textarea placeholder="小王，小张，小李" value="{{joins}}" bindinput="joinsInput" />
+    <text class="title">备注说明</text>
+    <textarea placeholder="对该行程的补充" value="{{mark}}" />
+    <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="createLocal">创建行程</button>
 </view>
+<toast />
 </template>
 <script>
 import wepy from 'wepy';
-import Counter from '../../../components/counter';
-import Picker from '../../../components/picker';
+import Toast from 'wepy-com-toast';
 
 const currentDate = new Date();
 
@@ -41,30 +49,53 @@ export default class Account extends wepy.page {
     config = {
         "navigationBarTitleText": '记记'
     };
-    data = {
-        year: currentDate.getFullYear(),
-        month: (currentDate.getMonth() + 1) < 10 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1,
-        day: null,
-        money: 50
-    };
     components = {
-        counter: Counter,
-        picker: Picker
+        toast: Toast
     };
+    data = {
+        travelName: '',
+        joins: '',
+        mark: '',
+        primarySize: 'default',
+        loading: false,
+        plain: false,
+        disabled: false
+    };
+
     methods = {
-        showPicker: () => {
-            this.$invoke('picker', 'show', 1, 2);
-        }
-    };
-    events = {
-        'picker-emit': ($events, ...items) => {
-            console.log($events + '-' + $events.source.year + '-' + $events.source.month + '-' + $events.source.day + '=====' + items);
-            this.year = items[0];
-            this.month = items[1];
-            this.day = items[2];
-            this.money = --this.money;
+        travelNameInput: (e) => {
+            this.travelName = e.detail.value;
             this.$apply();
+        },
+        joinsInput(e) {
+            this.joins = e.detail.value;
+            this.$apply();
+        },
+        createLocal() {
+            let localData = this.$parent.getLocalData() || [];
+            console.log(localData);
+            if (!this.travelName) {
+                console.log(1);
+                this.$invoke('toast', 'show', {
+                    title: '账单名称必填',
+                });
+            } else if (!this.joins) {
+                this.$invoke('toast', 'show', {
+                    title: '参与人必填',
+                });
+            } else {
+                let addData = {
+                    id: localData.length + 1,
+                    travelName: this.travelName,
+                    users: this.joins.split(','),
+                    mark: this.mark,
+                    content: {}
+                }
+                localData.push(addData);
+                this.$parent.setLocalData(localData);
+            }
         }
     };
+
 }
 </script>

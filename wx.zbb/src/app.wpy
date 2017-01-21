@@ -4,7 +4,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
 }
@@ -24,6 +23,7 @@ export default class extends wepy.app {
     config = {
         "pages": [
             "pages/account/index/index",
+            "pages/account/add/add",
             "pages/chaos/index",
             "pages/index"
         ],
@@ -60,6 +60,25 @@ export default class extends wepy.app {
         let res = await wx.getUserInfo();
         this.globalData.userInfo = res.userInfo;
         return res.userInfo;
+    }
+
+    getLocalData() {
+        try {
+            var value = wx.getStorageSync('travelLocal')
+            if (value) {
+                return value;
+            } else {
+                return false;
+            }
+        } catch (e) {
+            // Do something when catch error
+        }
+    }
+
+    setLocalData(data) {
+        try {
+            wx.setStorageSync('travelLocal', data)
+        } catch (e) {}
     }
 }
 </script>

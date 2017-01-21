@@ -19,15 +19,16 @@
             </view>
         </view>
     </view>
-    <view>
-        
-    <view class="counter {{$counter$style}}">
-        <button bindtap="$counter$plus" size="mini">  +  </button>
-        <button bindtap="$counter$minus" size="mini">  -  </button>
-        <text class="count"> {{$counter$num}} </text>
+
+    <!-- 内容部分 -->
+    <view class="item_groups">
+        <block xmlns:wx="" wx:for="{{localItems}}">
+            <view class="item">
+                <view>{{item.travelName}}</view>
+            </view>
+        </block>
     </view>
 
-    </view>
     
 <view class="component-picker" animation="{{$picker$animationData}}" style="width:100%">
     <picker-view indicator-style="height: 50px;" style="width: 100%; height: 250px;" value="{{$picker$value}}" bindchange="$picker$bindChange">
